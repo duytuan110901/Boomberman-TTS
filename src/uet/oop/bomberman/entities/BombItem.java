@@ -94,6 +94,29 @@ public class BombItem extends Entity {
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(3300),
                 (ActionEvent event) -> {
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(3800),
+                (ActionEvent event) -> {
+                    img = Sprite.bomb_exploded.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4300),
+                (ActionEvent event) -> {
+                    img = Sprite.bomb_exploded1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4800),
+                (ActionEvent event) -> {
+                    img = Sprite.bomb_exploded2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(5000),
+                (ActionEvent event) -> {
                     BombermanGame.stillObjects.remove(this);
                 }
         ));

@@ -74,8 +74,20 @@ public class BombermanGame extends Application {
                         bomberman.moveDown();
                     break;
                 case SPACE:
-                    bomb = new BombItem(bomberman.getX()/Sprite.SCALED_SIZE, bomberman.getY()/Sprite.SCALED_SIZE, Sprite.bomb_2.getFxImage());
+                    bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());
                     stillObjects.add(bomb);
+                    Flame left = new Flame(x-1, y, ObjectMap[y][x-1].getImg());
+                    Flame right = new Flame(x+1, y, ObjectMap[y][x+1].getImg());
+                    Flame up = new Flame(x, y-1, ObjectMap[y-1][x].getImg());
+                    Flame down = new Flame(x, y+1, ObjectMap[y+1][x].getImg());
+                    BombermanGame.stillObjects.add(left);
+                    BombermanGame.stillObjects.add(right);
+                    BombermanGame.stillObjects.add(up);
+                    BombermanGame.stillObjects.add(down);
+                    up.up();
+                    left.left();
+                    down.down();
+                    right.right();
                     bomb.explosion();
                     break;
 
