@@ -30,7 +30,6 @@ public class BombermanGame extends Application {
     private Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
 
     private Bomber bomberman;
-    private BombItem bomb;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -74,21 +73,29 @@ public class BombermanGame extends Application {
                         bomberman.moveDown();
                     break;
                 case SPACE:
-                    bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());
+                    BombItem bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());
                     stillObjects.add(bomb);
-                    Flame left = new Flame(x-1, y, ObjectMap[y][x-1].getImg());
-                    Flame right = new Flame(x+1, y, ObjectMap[y][x+1].getImg());
-                    Flame up = new Flame(x, y-1, ObjectMap[y-1][x].getImg());
-                    Flame down = new Flame(x, y+1, ObjectMap[y+1][x].getImg());
-                    BombermanGame.stillObjects.add(left);
-                    BombermanGame.stillObjects.add(right);
-                    BombermanGame.stillObjects.add(up);
-                    BombermanGame.stillObjects.add(down);
-                    up.up();
-                    left.left();
-                    down.down();
-                    right.right();
                     bomb.explosion();
+                    if (!(ObjectMap[y][x-1] instanceof Wall)) {
+                        Flame left = new Flame(x - 1, y, null);
+                        stillObjects.add(left);
+                        left.left();
+                    }
+                    if (!(ObjectMap[y][x+1] instanceof Wall)) {
+                        Flame right = new Flame(x + 1, y, null);
+                        stillObjects.add(right);
+                        right.right();
+                    }
+                    if (!(ObjectMap[y-1][x] instanceof Wall)) {
+                        Flame up = new Flame(x, y - 1, null);
+                        stillObjects.add(up);
+                        up.up();
+                    }
+                    if (!(ObjectMap[y+1][x] instanceof Wall)) {
+                        Flame down = new Flame(x, y+1, null);
+                        stillObjects.add(down);
+                        down.down();
+                    }
                     break;
 
                 default:
