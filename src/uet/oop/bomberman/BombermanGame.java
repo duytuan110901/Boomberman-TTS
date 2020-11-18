@@ -1,12 +1,15 @@
 package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -27,9 +30,11 @@ public class BombermanGame extends Application {
     private List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
     private char [][] mapMatrix = new char[HEIGHT][WIDTH];
-    private Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
+    public static Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
 
     private Bomber bomberman;
+    private int getX[] = {-1, 0, 1, 0};
+    private int getY[] = {0, -1, 0, 1};
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -76,6 +81,7 @@ public class BombermanGame extends Application {
                     BombItem bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());
                     stillObjects.add(bomb);
                     bomb.explosion();
+                    testBrick(x, y);
                     if (!(ObjectMap[y][x-1] instanceof Wall)) {
                         Flame left = new Flame(x - 1, y, null);
                         stillObjects.add(left);
@@ -96,6 +102,7 @@ public class BombermanGame extends Application {
                         stillObjects.add(down);
                         down.down();
                     }
+
                     break;
 
                 default:
@@ -157,5 +164,15 @@ public class BombermanGame extends Application {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         stillObjects.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
+    }
+
+    public void testBrick(int x, int y) {
+            for (int i=0; i<4; i++) {
+                if (ObjectMap[y+getY[i]][x+getX[i]] instanceof Brick) {
+                    Brick b = (Brick) ObjectMap[y+getY[i]][x+getX[i]];
+                    b.delete();
+                }
+
+            }
     }
 }
