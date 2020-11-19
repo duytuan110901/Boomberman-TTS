@@ -59,23 +59,37 @@ public class BombermanGame extends Application {
 
         scene.setOnKeyPressed(event -> {
             int x = bomberman.getX()/Sprite.SCALED_SIZE;
+            int x1 = bomberman.getX();
             int y = bomberman.getY()/Sprite.SCALED_SIZE;
+            int y1 = bomberman.getY();
             switch (event.getCode()) {
                 case RIGHT:
-                    if (ObjectMap[y][x+1] instanceof Grass)
+                    if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0)
                         bomberman.moveRight();
+                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick)  {
+                        bomberman.moveRight1();
+                    }
                     break;
                 case LEFT:
-                    if (ObjectMap[y][x-1] instanceof Grass)
+                    if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0)
                         bomberman.moveLeft();
+                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick) {
+                        bomberman.moveLeft1();
+                    }
                     break;
                 case UP:
-                    if (ObjectMap[y-1][x] instanceof Grass)
+                    if (ObjectMap[y-1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0)
                         bomberman.moveUp();
+                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick) {
+                        bomberman.moveUp1();
+                    }
                     break;
                 case DOWN:
-                    if (ObjectMap[y+1][x] instanceof Grass)
+                    if (ObjectMap[y+1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0)
                         bomberman.moveDown();
+                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof BombItem) {
+                        bomberman.moveDown1();
+                    }
                     break;
                 case SPACE:
                     BombItem bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());

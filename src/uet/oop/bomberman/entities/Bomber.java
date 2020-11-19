@@ -24,7 +24,7 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(0),
                 (ActionEvent event) -> {
                     img = Sprite.player_right.getFxImage();
                     x = x + Sprite.SCALED_SIZE/4;
@@ -32,24 +32,55 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_1.getFxImage();
                     x = x + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(200),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_2.getFxImage();
                     x = x + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(400),
+                Duration.millis(300),
                 (ActionEvent event) -> {
                     img = Sprite.player_right.getFxImage();
                     x = x+ Sprite.SCALED_SIZE/4;
+                }
+        ));
+        t.play();
+    }
+    public void moveRight1() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(0),
+                (ActionEvent event) -> {
+                    img = Sprite.player_right.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(100),
+                (ActionEvent event) -> {
+                    img = Sprite.player_right_1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(200),
+                (ActionEvent event) -> {
+                    img = Sprite.player_right_2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(300),
+                (ActionEvent event) -> {
+                    img = Sprite.player_right.getFxImage();
                 }
         ));
         t.play();
@@ -59,28 +90,28 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(0),
                 (ActionEvent event) -> {
                     img = Sprite.player_left.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_1.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(200),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_2.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(400),
+                Duration.millis(300),
                 (ActionEvent event) -> {
                     img = Sprite.player_left.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
@@ -88,13 +119,42 @@ public class Bomber extends Entity {
         ));
         t.play();
     }
+    public void moveLeft1() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
 
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(0),
+                (ActionEvent event) -> {
+                    img = Sprite.player_left.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(100),
+                (ActionEvent event) -> {
+                    img = Sprite.player_left_1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(200),
+                (ActionEvent event) -> {
+                    img = Sprite.player_left_2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(300),
+                (ActionEvent event) -> {
+                    img = Sprite.player_left.getFxImage();
+                }
+        ));
+        t.play();
+    }
     public void moveUp() {
         Timeline t = new Timeline();
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(00),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
@@ -102,21 +162,21 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_1.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(200),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_2.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(400),
+                Duration.millis(300),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
@@ -124,13 +184,43 @@ public class Bomber extends Entity {
         ));
         t.play();
     }
+    public void moveUp1() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
 
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(00),
+                (ActionEvent event) -> {
+                    img = Sprite.player_up.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(100),
+                (ActionEvent event) -> {
+                    img = Sprite.player_up_1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(200),
+                (ActionEvent event) -> {
+                    img = Sprite.player_up_2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(300),
+                (ActionEvent event) -> {
+                    img = Sprite.player_up.getFxImage();
+                }
+        ));
+        t.play();
+    }
     public void moveDown() {
         Timeline t = new Timeline();
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(00),
                 (ActionEvent event) -> {
                     img = Sprite.player_down.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
@@ -138,21 +228,21 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_1.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(200),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_2.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(400),
+                Duration.millis(300),
                 (ActionEvent event) -> {
                     img = Sprite.player_down.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
@@ -160,7 +250,37 @@ public class Bomber extends Entity {
         ));
         t.play();
     }
+    public void moveDown1() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
 
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(0),
+                (ActionEvent event) -> {
+                    img = Sprite.player_down.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(100),
+                (ActionEvent event) -> {
+                    img = Sprite.player_down_1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(200),
+                (ActionEvent event) -> {
+                    img = Sprite.player_down_2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(300),
+                (ActionEvent event) -> {
+                    img = Sprite.player_down.getFxImage();
+                }
+        ));
+        t.play();
+    }
     @Override
     public void update() {
 
