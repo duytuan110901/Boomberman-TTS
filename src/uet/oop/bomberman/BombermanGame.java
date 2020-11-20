@@ -33,8 +33,8 @@ public class BombermanGame extends Application {
     public static Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
 
     private Bomber bomberman;
-    private int getX[] = {-1, 0, 1, 0};
-    private int getY[] = {0, -1, 0, 1};
+    public int getX[] = {-1, 0, 1, 0};
+    public int getY[] = {0, -1, 0, 1};
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -138,11 +138,19 @@ public class BombermanGame extends Application {
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
 
+        for (Entity e : entities) {
+            if (e instanceof Balloom) {
+                Balloom b = (Balloom) e;
+                b.runB();
+            }
+        }
+
     }
 
     public void createMap() {
         File file = new File("target\\classes\\levels\\Level1.txt");
         try {
+            boolean kt = true;
             Scanner reader = new Scanner(file);
             String line = reader.nextLine();
             for (int j=0; j<HEIGHT; j++) {
@@ -151,18 +159,24 @@ public class BombermanGame extends Application {
                     char x= line.charAt(i);
                     mapMatrix[j][i] = x;
                     Entity object;
+                    Entity en = null;
                     if (x == '#') {
                         object = new Wall(i, j, Sprite.wall.getFxImage());
                     } else if (x == '*') {
                         object = new Brick(i, j, Sprite.brick.getFxImage());
                     } else if (x == 'x') {
                         object = new Portal(i, j, Sprite.portal.getFxImage());
+                    } else if (x == '1') {
+                        en = new Balloom(i, j, Sprite.balloom_right1.getFxImage());
+                        object = new Grass(i, j, Sprite.grass.getFxImage());
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
                     }
                     ObjectMap[j][i] = object;
                     stillObjects.add(object);
+                    if (en != null)
+                        entities.add(en);
                 }
             }
         } catch (Exception e) {

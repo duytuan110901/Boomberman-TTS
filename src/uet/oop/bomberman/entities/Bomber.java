@@ -32,21 +32,21 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_1.getFxImage();
                     x = x + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_2.getFxImage();
                     x = x + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_right.getFxImage();
                     x = x+ Sprite.SCALED_SIZE/4;
@@ -66,19 +66,19 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_1.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_right_2.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_right.getFxImage();
                 }
@@ -97,21 +97,21 @@ public class Bomber extends Entity {
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_1.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_2.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_left.getFxImage();
                     x = x - Sprite.SCALED_SIZE/4;
@@ -130,19 +130,19 @@ public class Bomber extends Entity {
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_1.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_left_2.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_left.getFxImage();
                 }
@@ -154,7 +154,7 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(00),
+                Duration.millis(0),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
@@ -162,21 +162,21 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_1.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_2.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                     y = y - Sprite.SCALED_SIZE/4;
@@ -189,26 +189,26 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(00),
+                Duration.millis(0),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                 }
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_1.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_up_2.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_up.getFxImage();
                 }
@@ -220,7 +220,7 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(00),
+                Duration.millis(0),
                 (ActionEvent event) -> {
                     img = Sprite.player_down.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
@@ -228,21 +228,21 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_1.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_2.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_down.getFxImage();
                     y = y + Sprite.SCALED_SIZE/4;
@@ -262,19 +262,19 @@ public class Bomber extends Entity {
         ));
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(100),
+                Duration.millis(50),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_1.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(200),
+                Duration.millis(100),
                 (ActionEvent event) -> {
                     img = Sprite.player_down_2.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(150),
                 (ActionEvent event) -> {
                     img = Sprite.player_down.getFxImage();
                 }
