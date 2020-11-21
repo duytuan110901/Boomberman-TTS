@@ -9,9 +9,13 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bomb extends Entity {
-    public double TimeAlive;
+    public long TimeStart;
+    public int getX[] = {-1, 0, 1, 0};
+    public int getY[] = {0, -1, 0, 1};
     public Bomb(int x, int y, Image img) {
         super(x, y, img);
     }
@@ -117,14 +121,35 @@ public class Bomb extends Entity {
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(5000),
                 (ActionEvent event) -> {
+
                     BombermanGame.stillObjects.remove(this);
+
                 }
         ));
         t.play();
     }
 
+    public void checkEntities() {
+        if (System.currentTimeMillis() - TimeStart > 3800) {
+
+            List<Entity> l = new ArrayList<Entity>();
+            for (int k = 0; k < 4; k++) {
+                for (Entity e : BombermanGame.entities) {
+                    if ((e.getX() == x && e.getY() == y) || (e.getX() == x + getX[k] * Sprite.SCALED_SIZE && e.getY() == y + getY[k] * Sprite.SCALED_SIZE)) {
+                        l.add(e);
+                    }
+                }
+            }
+            for (Entity e : l) {
+                if (e instanceof Bomber) {
+                    Bomber b = (Bomber) e;
+                    b.die();
+                }
+            }
+        }
+    }
     @Override
     public void update() {
-
+        checkEntities();
     }
 }

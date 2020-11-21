@@ -29,7 +29,7 @@ public class BombermanGame extends Application {
     
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
+    public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
     private char [][] mapMatrix = new char[HEIGHT][WIDTH];
     public static Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
@@ -96,6 +96,7 @@ public class BombermanGame extends Application {
                 case SPACE:
                     Bomb bomb = new Bomb(x, y, Sprite.bomb_2.getFxImage());
                     stillObjects.add(bomb);
+                    bomb.TimeStart = System.currentTimeMillis();
                     bomb.explosion();
                     testBrick(x, y);
                     if (!(ObjectMap[y][x-1] instanceof Wall)) {
@@ -118,7 +119,6 @@ public class BombermanGame extends Application {
                         stillObjects.add(down);
                         down.down();
                     }
-
                     break;
 
                 default:
@@ -146,7 +146,6 @@ public class BombermanGame extends Application {
                 b.runB();
             }
         }
-
     }
 
     public void createMap() {
@@ -194,6 +193,7 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+        stillObjects.forEach(Entity::update);
     }
 
     public void render() {
@@ -211,7 +211,6 @@ public class BombermanGame extends Application {
                     Item it = (Item) ObjectMap[y+getY[i]][x+getX[i]];
                     it.setImg();
                 }
-
             }
     }
 }

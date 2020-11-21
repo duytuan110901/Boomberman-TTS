@@ -12,7 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
+
+import java.sql.Time;
 
 public class Bomber extends Entity {
     public Bomber(int x, int y, Image img) {
@@ -280,6 +283,40 @@ public class Bomber extends Entity {
                 }
         ));
         t.play();
+    }
+
+    public void die() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(500),
+                (ActionEvent event) -> {
+                    img = Sprite.player_dead1.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(1000),
+                (ActionEvent event) -> {
+                    img = Sprite.player_dead2.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(1500),
+                (ActionEvent event) -> {
+                    img = Sprite.player_dead3.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(1800),
+                (ActionEvent event) -> {
+                    BombermanGame.entities.remove(this);
+                }
+        ));
+        t.play();
+
     }
     @Override
     public void update() {
