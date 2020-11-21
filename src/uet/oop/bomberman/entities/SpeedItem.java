@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class BombItem extends Item{
-    public BombItem(int x, int y, Image img) {
+public class SpeedItem extends Item{
+    public SpeedItem(int x, int y, Image img) {
         super(x, y, img);
     }
 
@@ -20,7 +20,7 @@ public class BombItem extends Item{
             t.getKeyFrames().add(new KeyFrame(
                     Duration.millis(5000),
                     (ActionEvent event) -> {
-                        img = Sprite.powerup_bombs.getFxImage();
+                        img = Sprite.powerup_speed.getFxImage();
                         explosed = true;
                     }
             ));

@@ -10,9 +10,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -87,12 +89,12 @@ public class BombermanGame extends Application {
                 case DOWN:
                     if (ObjectMap[y+1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0)
                         bomberman.moveDown();
-                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof BombItem) {
+                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb) {
                         bomberman.moveDown1();
                     }
                     break;
                 case SPACE:
-                    BombItem bomb = new BombItem(x, y, Sprite.bomb_2.getFxImage());
+                    Bomb bomb = new Bomb(x, y, Sprite.bomb_2.getFxImage());
                     stillObjects.add(bomb);
                     bomb.explosion();
                     testBrick(x, y);
@@ -169,6 +171,12 @@ public class BombermanGame extends Application {
                     } else if (x == '1') {
                         en = new Balloom(i, j, Sprite.balloom_right1.getFxImage());
                         object = new Grass(i, j, Sprite.grass.getFxImage());
+                    } else if ( x == 'b') {
+                        object = new BombItem(i, j, Sprite.brick.getFxImage());
+                    } else if ( x == 's') {
+                        object = new SpeedItem(i, j, Sprite.brick.getFxImage());
+                    } else if ( x == 'f') {
+                        object = new FlameItem(i, j, Sprite.brick.getFxImage());
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
@@ -199,6 +207,9 @@ public class BombermanGame extends Application {
                 if (ObjectMap[y+getY[i]][x+getX[i]] instanceof Brick) {
                     Brick b = (Brick) ObjectMap[y+getY[i]][x+getX[i]];
                     b.delete();
+                }else if (ObjectMap[y+getY[i]][x+getX[i]] instanceof Item) {
+                    Item it = (Item) ObjectMap[y+getY[i]][x+getX[i]];
+                    it.setImg();
                 }
 
             }
