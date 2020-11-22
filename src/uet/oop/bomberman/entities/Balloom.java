@@ -8,6 +8,8 @@ import javafx.util.Duration;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Balloom extends Entity{
@@ -51,7 +53,64 @@ public class Balloom extends Entity{
         ));
         t.play();
     }
+
+    public void die() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(300),
+                (ActionEvent event) -> {
+                    img = Sprite.balloom_dead.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(800),
+                (ActionEvent event) -> {
+                    BombermanGame.entities.remove(this);
+                }
+        ));
+        t.play();
+    }
+
+    public boolean checkColision(Bomber b) {
+        int topBall = y ;
+        int bottomBall = y + 30;
+        int rightBall = x + 28;
+        int leftBall = x + 4;
+
+        int topBomber = b.getY() ;
+        int bottomBomber = b.getY() + 30;
+        int rightBomber = b.getX() + 20;
+        int leftBomber = b.getX() ;
+
+        if (bottomBall <= topBomber) {
+            return false;
+        }
+        if (topBall >= bottomBomber) {
+            return false;
+        }
+        if (rightBall <= leftBomber) {
+            return false;
+        }
+        if (leftBall >= rightBomber) {
+            return false;
+        }
+        return true;
+    }
     @Override
     public void update() {
+        List<Bomber> l = new ArrayList<Bomber>();
+        for (Entity e : BombermanGame.entities) {
+            if (e instanceof Bomber) {
+                l.add((Bomber) e);
+            }
+        }
+        for (Bomber e : l)  {
+            if (checkColision(e)) {
+                e.die();
+            }
+        }
+
     }
 }

@@ -145,6 +145,10 @@ public class Bomb extends Entity {
                     Bomber b = (Bomber) e;
                     b.die();
                 }
+                if (e instanceof Balloom) {
+                    Balloom b = (Balloom) e;
+                    b.die();
+                }
             }
         }
     }
