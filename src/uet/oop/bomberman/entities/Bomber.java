@@ -290,7 +290,7 @@ public class Bomber extends Entity {
         t.setCycleCount(1);
 
         t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(500),
+                Duration.millis(400),
                 (ActionEvent event) -> {
                     img = Sprite.player_dead1.getFxImage();
                 }

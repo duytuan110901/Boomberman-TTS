@@ -121,8 +121,9 @@ public class Bomb extends Entity {
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(5000),
                 (ActionEvent event) -> {
-
+                    BombermanGame.BombMap[y/32][x/32] = 0;
                     BombermanGame.stillObjects.remove(this);
+
 
                 }
         ));

@@ -27,7 +27,7 @@ public class Balloom extends Entity{
         int d = ran.nextInt(4);
         int xx = x / Sprite.SCALED_SIZE;
         int yy = y / Sprite.SCALED_SIZE;
-        while (!(BombermanGame.ObjectMap[yy+getY[d]][xx+getX[d]] instanceof Grass))  {
+        while (!(BombermanGame.ObjectMap[yy+getY[d]][xx+getX[d]] instanceof Grass) || BombermanGame.BombMap[yy+getY[d]][xx+getX[d]]==1)  {
             d = ran.nextInt(4);
         }
         int d1 = d;
