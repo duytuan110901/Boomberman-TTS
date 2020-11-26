@@ -15,5 +15,7 @@ public class Item extends Entity {
 
     }
 
-    public void setImg() {}
+    public void setImg() {
+
+    }
 }

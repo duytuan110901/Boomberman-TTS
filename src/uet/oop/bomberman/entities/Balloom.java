@@ -15,8 +15,8 @@ import java.util.Random;
 public class Balloom extends Entity{
     private double v = 4;
 
-    public int getX[] = {-1, 0, 1, 0};
-    public int getY[] = {0, -1, 0, 1};
+    public int getX[] = {-1, 0, 1, 0, 0};
+    public int getY[] = {0, -1, 0, 1, 0};
 
     public Balloom(int x, int y, Image img) {
         super(x, y, img);
@@ -24,11 +24,11 @@ public class Balloom extends Entity{
 
     public void run() {
         Random ran = new Random();
-        int d = ran.nextInt(4);
+        int d = ran.nextInt(5);
         int xx = x / Sprite.SCALED_SIZE;
         int yy = y / Sprite.SCALED_SIZE;
         while (!(BombermanGame.ObjectMap[yy+getY[d]][xx+getX[d]] instanceof Grass) || BombermanGame.BombMap[yy+getY[d]][xx+getX[d]]==1)  {
-            d = ran.nextInt(4);
+            d = ran.nextInt(5);
         }
         int d1 = d;
         Timeline t = new Timeline();
@@ -108,7 +108,7 @@ public class Balloom extends Entity{
         }
         for (Bomber e : l)  {
             if (checkColision(e)) {
-                e.die();
+
             }
         }
 

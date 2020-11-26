@@ -69,28 +69,28 @@ public class BombermanGame extends Application {
                 case RIGHT:
                     if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0 && BombMap[y][x+1]!=1)
                         bomberman.moveRight();
-                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick)  {
+                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick || BombMap[y][x+1] == 1)  {
                         bomberman.moveRight1();
                     }
                     break;
                 case LEFT:
                     if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0 && BombMap[y][x-1]!=1)
                         bomberman.moveLeft();
-                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick) {
+                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick||BombMap[y][x-1]==1) {
                         bomberman.moveLeft1();
                     }
                     break;
                 case UP:
                     if (ObjectMap[y-1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y-1][x]!=1)
                         bomberman.moveUp();
-                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick) {
+                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick||BombMap[y-1][x]==1) {
                         bomberman.moveUp1();
                     }
                     break;
                 case DOWN:
                     if (ObjectMap[y+1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y+1][x]!=1)
                         bomberman.moveDown();
-                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb) {
+                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb||BombMap[y+1][x]==1) {
                         bomberman.moveDown1();
                     }
                     break;
