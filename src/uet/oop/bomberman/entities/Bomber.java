@@ -312,7 +312,8 @@ public class Bomber extends Entity {
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(1800),
                 (ActionEvent event) -> {
-                    BombermanGame.entities.remove(this);
+                    //BombermanGame.entities.remove(this);
+                    //System.exit(0);
                 }
         ));
         t.play();
