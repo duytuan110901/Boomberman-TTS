@@ -31,13 +31,17 @@ public class BombermanGame extends Application {
     private Canvas canvas;
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
-    private char [][] mapMatrix = new char[HEIGHT][WIDTH];
+    private final char [][] mapMatrix = new char[HEIGHT][WIDTH];
     public static Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
     public static int [][] BombMap = new int[HEIGHT][WIDTH];
 
     private Bomber bomberman;
-    public int getX[] = {-1, 0, 1, 0};
-    public int getY[] = {0, -1, 0, 1};
+    public int[] getX = {-1, 0, 1, 0};
+    public int[] getY = {0, -1, 0, 1};
+    public static int n_bomb = 1;
+    public static int n_flame = 1;
+    public static int n_speed = 1;
+    public static int check1 = -1;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -67,59 +71,121 @@ public class BombermanGame extends Application {
             int y1 = bomberman.getY();
             switch (event.getCode()) {
                 case RIGHT:
-                    if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0 && BombMap[y][x+1]!=1)
-                        bomberman.moveRight();
-                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick)  {
+                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick) {
                         bomberman.moveRight1();
+                    } else if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x+1]!=1) {
+                        bomberman.moveRight();
+                    }
+                    if (ObjectMap[y][x+1] instanceof Item) {
+                        if (Item.explosed == true) {
+                            bomberman.moveRight();
+                            Item it = (Item) ObjectMap[y][x+1];
+                            it.checkItem();
+                            Item.explosed = false;
+                        } else {
+                            bomberman.moveRight1();
+                        }
                     }
                     break;
                 case LEFT:
-                    if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0&& y1 % 32 == 0 && BombMap[y][x-1]!=1)
-                        bomberman.moveLeft();
                     if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick) {
                         bomberman.moveLeft1();
+                    } else if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x-1]!=1) {
+                        bomberman.moveLeft();
+                    } else if (ObjectMap[y][x-1] instanceof Item) {
+                        if (Item.explosed == true) {
+                            bomberman.moveLeft();
+                            Item it = (Item) ObjectMap[y][x-1];
+                            it.checkItem();
+                            Item.explosed = false;
+                        } else {
+                            bomberman.moveLeft1();
+                        }
                     }
                     break;
                 case UP:
-                    if (ObjectMap[y-1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y-1][x]!=1)
-                        bomberman.moveUp();
                     if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick) {
                         bomberman.moveUp1();
+                    } else if (ObjectMap[y-1][x] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y-1][x]!=1) {
+                        bomberman.moveUp();
+                    } else if (ObjectMap[y-1][x] instanceof Item) {
+                        if (Item.explosed == true) {
+                            bomberman.moveUp();
+                            Item it = (Item) ObjectMap[y-1][x];
+                            it.checkItem();
+                            Item.explosed = false;
+                        } else {
+                            bomberman.moveUp1();
+                        }
                     }
                     break;
                 case DOWN:
-                    if (ObjectMap[y+1][x] instanceof Grass && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y+1][x]!=1)
-                        bomberman.moveDown();
                     if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb) {
                         bomberman.moveDown1();
+                    } else if ((ObjectMap[y+1][x] instanceof Grass) && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y+1][x]!=1) {
+                        bomberman.moveDown();
+                    } else if (ObjectMap[y+1][x] instanceof Item) {
+                        if (Item.explosed == true) {
+                            bomberman.moveDown();
+                            Item it = (Item) ObjectMap[y+1][x];
+                            it.checkItem();
+                            Item.explosed = false;
+                        } else {
+                            bomberman.moveDown1();
+                        }
                     }
                     break;
                 case SPACE:
-                    Bomb bomb = new Bomb(x, y, Sprite.bomb_2.getFxImage());
-                    stillObjects.add(bomb);
-                    bomb.TimeStart = System.currentTimeMillis();
-                    bomb.explosion();
-                    testBrick(x, y);
-                    BombMap[y][x] = 1;
-                    if (!(ObjectMap[y][x-1] instanceof Wall)) {
-                        Flame left = new Flame(x - 1, y, null);
-                        stillObjects.add(left);
-                        left.left();
-                    }
-                    if (!(ObjectMap[y][x+1] instanceof Wall) ) {
-                        Flame right = new Flame(x + 1, y, null);
-                        stillObjects.add(right);
-                        right.right();
-                    }
-                    if (!(ObjectMap[y-1][x] instanceof Wall) ) {
-                        Flame up = new Flame(x, y - 1, null);
-                        stillObjects.add(up);
-                        up.up();
-                    }
-                    if (!(ObjectMap[y+1][x] instanceof Wall) ) {
-                        Flame down = new Flame(x, y+1, null);
-                        stillObjects.add(down);
-                        down.down();
+                    for (int j = 0; j < n_bomb; j++) {
+                        Bomb bomb = new Bomb(x, y, Sprite.bomb_2.getFxImage());
+                        stillObjects.add(bomb);
+                        bomb.TimeStart = System.currentTimeMillis();
+                        bomb.explosion();
+                        testBrick(y, x);
+                        BombMap[y][x] = 1;
+
+                        for (int i = 0; i < n_flame - 1; i++) {
+                            if (!(ObjectMap[y][x-1-i] instanceof Wall)) {
+                                Flame left = new Flame(x - 1 - i, y, null);
+                                stillObjects.add(left);
+                                left.statusHorizontal();
+                            }
+                            if (!(ObjectMap[y][x+1+i] instanceof Wall)) {
+                                Flame right = new Flame(x + 1 + i, y, null);
+                                stillObjects.add(right);
+                                right.statusHorizontal();
+                            }
+                            if (!(ObjectMap[y-1-i][x] instanceof Wall)) {
+                                Flame up = new Flame(x, y - 1 - i, null);
+                                stillObjects.add(up);
+                                up.statusVertical();
+                            }
+                            if (!(ObjectMap[y+1+i][x] instanceof Wall)) {
+                                Flame down = new Flame(x, y + 1 + i, null);
+                                stillObjects.add(down);
+                                down.statusVertical();
+                            }
+                        }
+                        if (!(ObjectMap[y][x - 1] instanceof Wall)) {
+                            Flame left = new Flame(x - 1 - (n_flame - 1), y, null);
+                            stillObjects.add(left);
+                            left.left();
+                        }
+                        if (!(ObjectMap[y][x + 1] instanceof Wall)) {
+                            Flame right = new Flame(x + 1 + (n_flame - 1), y, null);
+                            stillObjects.add(right);
+                            right.right();
+                        }
+                        if (!(ObjectMap[y - 1][x] instanceof Wall)) {
+                            Flame up = new Flame(x, y - 1 - (n_flame - 1), null);
+                            stillObjects.add(up);
+                            up.up();
+                        }
+                        if (!(ObjectMap[y + 1][x] instanceof Wall)) {
+                            Flame down = new Flame(x, y + 1 + (n_flame - 1), null);
+                            stillObjects.add(down);
+                            down.down();
+                        }
                     }
                     break;
 
@@ -204,15 +270,17 @@ public class BombermanGame extends Application {
         entities.forEach(g -> g.render(gc));
     }
 
-    public void testBrick(int x, int y) {
-            for (int i=0; i<4; i++) {
-                if (ObjectMap[y+getY[i]][x+getX[i]] instanceof Brick) {
-                    Brick b = (Brick) ObjectMap[y+getY[i]][x+getX[i]];
-                    b.delete();
-                }else if (ObjectMap[y+getY[i]][x+getX[i]] instanceof Item) {
-                    Item it = (Item) ObjectMap[y+getY[i]][x+getX[i]];
-                    it.setImg();
-                }
+    public void testBrick(int y, int x) {
+        for (int i = 0; i < 4; i++) {
+            if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Brick) {
+                Brick b = (Brick) ObjectMap[(y + getY[i])][(x + getX[i])];
+                b.delete();
+            } else if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Item) {
+                Item it = (Item) ObjectMap[(y + getY[i])][(x + getX[i])];
+                it.setImg();
+                Item.TimerStart = System.currentTimeMillis();
             }
+        }
+
     }
 }

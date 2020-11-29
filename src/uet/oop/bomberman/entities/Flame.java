@@ -11,6 +11,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import java.awt.*;
 
 public class Flame extends Entity {
+    private int v;
     public Flame(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
     }
@@ -57,36 +58,38 @@ public class Flame extends Entity {
         Timeline t = new Timeline();
         t.setCycleCount(1);
 
-        t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(3300),
-                (ActionEvent event) -> {
+        for (int i = 0; i <=1; i++) {
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(3300),
+                    (ActionEvent event) -> {
 
-                }
-        ));
-        t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(3800),
-                (ActionEvent event) -> {
-                    img = Sprite.explosion_horizontal_right_last.getFxImage();
-                }
-        ));
-        t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(4300),
-                (ActionEvent event) -> {
-                    img = Sprite.explosion_horizontal_right_last1.getFxImage();
-                }
-        ));
-        t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(4800),
-                (ActionEvent event) -> {
-                    img = Sprite.explosion_horizontal_right_last2.getFxImage();
-                }
-        ));
-        t.getKeyFrames().add(new KeyFrame(
-                Duration.millis(5000),
-                (ActionEvent event) -> {
-                    BombermanGame.stillObjects.remove(this);
-                }
-        ));
+                    }
+            ));
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(3800),
+                    (ActionEvent event) -> {
+                        img = Sprite.explosion_horizontal_right_last.getFxImage();
+                    }
+            ));
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(4300),
+                    (ActionEvent event) -> {
+                        img = Sprite.explosion_horizontal_right_last1.getFxImage();
+                    }
+            ));
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(4800),
+                    (ActionEvent event) -> {
+                        img = Sprite.explosion_horizontal_right_last2.getFxImage();
+                    }
+            ));
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(5000),
+                    (ActionEvent event) -> {
+                        BombermanGame.stillObjects.remove(this);
+                    }
+            ));
+        }
         t.play();
     }
 
@@ -153,6 +156,66 @@ public class Flame extends Entity {
                 Duration.millis(4800),
                 (ActionEvent event) -> {
                     img = Sprite.explosion_vertical_down_last2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(5000),
+                (ActionEvent event) -> {
+                    BombermanGame.stillObjects.remove(this);
+                }
+        ));
+        t.play();
+    }
+    public void statusHorizontal() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(3800),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_horizontal.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4300),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_horizontal1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4800),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_horizontal2.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(5000),
+                (ActionEvent event) -> {
+                    BombermanGame.stillObjects.remove(this);
+                }
+        ));
+        t.play();
+    }
+    public void statusVertical() {
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(3800),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_vertical.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4300),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_vertical1.getFxImage();
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4800),
+                (ActionEvent event) -> {
+                    img = Sprite.explosion_vertical2.getFxImage();
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(

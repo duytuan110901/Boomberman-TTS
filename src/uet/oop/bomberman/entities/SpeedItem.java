@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class SpeedItem extends Item{
@@ -12,6 +13,7 @@ public class SpeedItem extends Item{
         super(x, y, img);
     }
 
+    @Override
     public void setImg() {
         if (explosed == false) {
             Timeline t = new Timeline();
@@ -24,7 +26,24 @@ public class SpeedItem extends Item{
                         explosed = true;
                     }
             ));
+            t.getKeyFrames().add(new KeyFrame(
+                    Duration.millis(35000),
+                    (ActionEvent event) -> {
+                        super.delete();
+                    }
+            ));
             t.play();
         }
+    }
+
+    @Override
+    public void checkItem() {
+        if (this.x == x && this.y == y) {
+            super.delete();
+        }
+    }
+    @Override
+    public void update() {
+
     }
 }

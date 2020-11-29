@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -23,7 +24,7 @@ public class Bomb extends Entity {
     public void explosion() {
         Timeline t = new Timeline();
         t.setCycleCount(1);
-
+        BombermanGame.n_bomb--;
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(250),
                 (ActionEvent event) -> {
@@ -123,8 +124,12 @@ public class Bomb extends Entity {
                 (ActionEvent event) -> {
                     BombermanGame.BombMap[y/32][x/32] = 0;
                     BombermanGame.stillObjects.remove(this);
-
-
+                }
+        ));
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(5200),
+                (ActionEvent event) -> {
+                    BombermanGame.n_bomb++;
                 }
         ));
         t.play();
