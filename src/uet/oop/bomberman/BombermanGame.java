@@ -41,7 +41,6 @@ public class BombermanGame extends Application {
     public static int n_bomb = 1;
     public static int n_flame = 1;
     public static int n_speed = 1;
-    public static int check1 = -1;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -143,48 +142,64 @@ public class BombermanGame extends Application {
                         bomb.explosion();
                         testBrick(y, x);
                         BombMap[y][x] = 1;
-
+                        int[] checkWall = {0, 0, 0, 0};
                         for (int i = 0; i < n_flame - 1; i++) {
-                            if (!(ObjectMap[y][x-1-i] instanceof Wall)) {
+                            if (checkWall[0] == 0 && !(ObjectMap[y][x-1-i] instanceof Wall)) {
                                 Flame left = new Flame(x - 1 - i, y, null);
                                 stillObjects.add(left);
                                 left.statusHorizontal();
+                                testBrick(y, x - 1 - i);
+                            } else {
+                                checkWall[0] = 1;
                             }
-                            if (!(ObjectMap[y][x+1+i] instanceof Wall)) {
+                            if (checkWall[1] == 0 && !(ObjectMap[y][x+1+i] instanceof Wall)) {
                                 Flame right = new Flame(x + 1 + i, y, null);
                                 stillObjects.add(right);
                                 right.statusHorizontal();
+                                testBrick(y, x + 1 + i);
+                            } else {
+                                checkWall[1] = 1;
                             }
-                            if (!(ObjectMap[y-1-i][x] instanceof Wall)) {
+                            if (checkWall[2] == 0 && !(ObjectMap[y-1-i][x] instanceof Wall)) {
                                 Flame up = new Flame(x, y - 1 - i, null);
                                 stillObjects.add(up);
                                 up.statusVertical();
+                                testBrick(y - 1 - i, x);
+                            } else {
+                                checkWall[2] = 1;
                             }
-                            if (!(ObjectMap[y+1+i][x] instanceof Wall)) {
+                            if (checkWall[3] == 0 && !(ObjectMap[y+1+i][x] instanceof Wall)) {
                                 Flame down = new Flame(x, y + 1 + i, null);
                                 stillObjects.add(down);
                                 down.statusVertical();
+                                testBrick(y + 1 + i, x);
+                            } else {
+                                checkWall[3] = 1;
                             }
                         }
-                        if (!(ObjectMap[y][x - 1] instanceof Wall)) {
+                        if (checkWall[0] == 0 && !(ObjectMap[y][x - 1 - (n_flame - 1)] instanceof Wall)) {
                             Flame left = new Flame(x - 1 - (n_flame - 1), y, null);
                             stillObjects.add(left);
                             left.left();
+                            testBrick(y, x - 1 - (n_flame - 1));
                         }
-                        if (!(ObjectMap[y][x + 1] instanceof Wall)) {
+                        if (checkWall[1] == 0 && !(ObjectMap[y][x + 1 + (n_flame - 1)] instanceof Wall)) {
                             Flame right = new Flame(x + 1 + (n_flame - 1), y, null);
                             stillObjects.add(right);
                             right.right();
+                            testBrick(y, x + 1 + (n_flame - 1));
                         }
-                        if (!(ObjectMap[y - 1][x] instanceof Wall)) {
+                        if (checkWall[2] == 0 && !(ObjectMap[y - 1 - (n_flame - 1)][x] instanceof Wall)) {
                             Flame up = new Flame(x, y - 1 - (n_flame - 1), null);
                             stillObjects.add(up);
                             up.up();
+                            testBrick(y - 1 - (n_flame - 1), x);
                         }
-                        if (!(ObjectMap[y + 1][x] instanceof Wall)) {
+                        if (checkWall[3] == 0 && !(ObjectMap[y + 1 + (n_flame - 1)][x] instanceof Wall)) {
                             Flame down = new Flame(x, y + 1 + (n_flame - 1), null);
                             stillObjects.add(down);
                             down.down();
+                            testBrick(x, y + 1 + (n_flame - 1));
                         }
                     }
                     break;
@@ -234,7 +249,7 @@ public class BombermanGame extends Application {
                     } else if (x == '*') {
                         object = new Brick(i, j, Sprite.brick.getFxImage());
                     } else if (x == 'x') {
-                        object = new Portal(i, j, Sprite.portal.getFxImage());
+                        object = new Portal(i, j, Sprite.brick.getFxImage());
                     } else if (x == '1') {
                         en = new Balloom(i, j, Sprite.balloom_right1.getFxImage());
                         object = new Grass(i, j, Sprite.grass.getFxImage());
@@ -271,16 +286,13 @@ public class BombermanGame extends Application {
     }
 
     public void testBrick(int y, int x) {
-        for (int i = 0; i < 4; i++) {
-            if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Brick) {
-                Brick b = (Brick) ObjectMap[(y + getY[i])][(x + getX[i])];
-                b.exploded();
-            } else if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Item) {
-                Item it = (Item) ObjectMap[(y + getY[i])][(x + getX[i])];
-                it.setImg();
-                Item.TimerStart = System.currentTimeMillis();
-            }
+        if (ObjectMap[y][x] instanceof Brick) {
+            Brick b = (Brick) ObjectMap[y][x];
+            b.exploded();
+        } else if (ObjectMap[y][x] instanceof Item) {
+            Item it = (Item) ObjectMap[y][x];
+            it.setImg();
+            Item.TimerStart = System.currentTimeMillis();
         }
-
     }
 }

@@ -108,7 +108,7 @@ public class Balloom extends Entity{
         }
         for (Bomber e : l)  {
             if (checkColision(e)) {
-
+                e.die();
             }
         }
 
