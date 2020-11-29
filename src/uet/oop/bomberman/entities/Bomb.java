@@ -149,7 +149,6 @@ public class Bomb extends Entity {
             for (Entity e : l) {
                 if (e instanceof Bomber) {
                     Bomber b = (Bomber) e;
-                    b.die();
                 }
                 if (e instanceof Balloom) {
                     Balloom b = (Balloom) e;
