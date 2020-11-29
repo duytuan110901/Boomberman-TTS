@@ -119,7 +119,7 @@ public class Oneal extends Entity {
     }
 
     public void backtracking(int endX, int endY, int xx, int yy, int save_path) {
-        if(c[yy][xx] == 0 && BombermanGame.ObjectMap[yy][xx] instanceof Grass) {
+        if(c[yy][xx] == 0 && BombermanGame.ObjectMap[yy][xx] instanceof Grass && BombermanGame.BombMap[yy][xx]!=1) {
             c[yy][xx] = 1;
             choose_one.add(save_path);
             if(xx == endX && yy == endY)
