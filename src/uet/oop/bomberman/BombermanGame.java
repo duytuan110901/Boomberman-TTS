@@ -199,7 +199,7 @@ public class BombermanGame extends Application {
                             Flame down = new Flame(x, y + 1 + (n_flame - 1), null);
                             stillObjects.add(down);
                             down.down();
-                            testBrick(x, y + 1 + (n_flame - 1));
+                            testBrick( y + 1 + (n_flame - 1), x);
                         }
                     }
                     break;
