@@ -13,9 +13,30 @@ public class Brick extends Entity{
         super(x, y, img);
     }
 
-    public void delete() {
+    public void exploded() {
         Timeline t = new Timeline();
         t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(3800),
+                (ActionEvent event) -> {
+                    img = Sprite.brick_exploded.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4300),
+                (ActionEvent event) -> {
+                    img = Sprite.brick_exploded1.getFxImage();
+                }
+        ));
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(4800),
+                (ActionEvent event) -> {
+                    img = Sprite.brick_exploded2.getFxImage();
+                }
+        ));
 
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(5000),
@@ -27,8 +48,8 @@ public class Brick extends Entity{
                 }
         ));
         t.play();
-
     }
+
     @Override
     public void update() {
 

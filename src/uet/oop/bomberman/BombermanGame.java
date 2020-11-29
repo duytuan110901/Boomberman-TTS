@@ -274,7 +274,7 @@ public class BombermanGame extends Application {
         for (int i = 0; i < 4; i++) {
             if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Brick) {
                 Brick b = (Brick) ObjectMap[(y + getY[i])][(x + getX[i])];
-                b.delete();
+                b.exploded();
             } else if (ObjectMap[(y + getY[i])][(x + getX[i])] instanceof Item) {
                 Item it = (Item) ObjectMap[(y + getY[i])][(x + getX[i])];
                 it.setImg();
