@@ -35,7 +35,7 @@ public class BombermanGame extends Application {
     public static Entity [][] ObjectMap = new Entity[HEIGHT][WIDTH];
     public static int [][] BombMap = new int[HEIGHT][WIDTH];
 
-    private Bomber bomberman;
+    public static Bomber bomberman;
     public int[] getX = {-1, 0, 1, 0};
     public int[] getY = {0, -1, 0, 1};
     public static int n_bomb = 1;
@@ -228,6 +228,10 @@ public class BombermanGame extends Application {
                 Balloom b = (Balloom) e;
                 b.runB();
             }
+            if (e instanceof Oneal) {
+                Oneal o = (Oneal) e;
+                o.runB();
+            }
         }
     }
 
@@ -259,6 +263,9 @@ public class BombermanGame extends Application {
                         object = new SpeedItem(i, j, Sprite.brick.getFxImage());
                     } else if ( x == 'f') {
                         object = new FlameItem(i, j, Sprite.brick.getFxImage());
+                    } else if (x == '2') {
+                        en = new Oneal(i, j, Sprite.oneal_right1.getFxImage());
+                        object = new Grass(i, j, Sprite.grass.getFxImage());
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
