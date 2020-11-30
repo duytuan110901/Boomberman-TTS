@@ -70,7 +70,7 @@ public class BombermanGame extends Application {
             int y1 = bomberman.getY();
             switch (event.getCode()) {
                 case RIGHT:
-                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick) {
+                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick || BombMap[y][x+1]==1) {
                         bomberman.moveRight1();
                     } else if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x+1]!=1) {
                         bomberman.moveRight();
@@ -87,7 +87,7 @@ public class BombermanGame extends Application {
                     }
                     break;
                 case LEFT:
-                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick) {
+                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick||BombMap[y][x-1]==1) {
                         bomberman.moveLeft1();
                     } else if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x-1]!=1) {
                         bomberman.moveLeft();
@@ -103,7 +103,7 @@ public class BombermanGame extends Application {
                     }
                     break;
                 case UP:
-                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick) {
+                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick || BombMap[y-1][x]==1) {
                         bomberman.moveUp1();
                     } else if (ObjectMap[y-1][x] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y-1][x]!=1) {
                         bomberman.moveUp();
@@ -119,7 +119,7 @@ public class BombermanGame extends Application {
                     }
                     break;
                 case DOWN:
-                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb) {
+                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb || BombMap[y+1][x]==1) {
                         bomberman.moveDown1();
                     } else if ((ObjectMap[y+1][x] instanceof Grass) && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y+1][x]!=1) {
                         bomberman.moveDown();
