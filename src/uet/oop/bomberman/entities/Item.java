@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Item extends Entity {
     public static long TimerStart;
-    public static boolean explosed = false;
+    public boolean explosed = false;
     public Item(int x, int y, Image img) {
         super(x, y, img);
     }

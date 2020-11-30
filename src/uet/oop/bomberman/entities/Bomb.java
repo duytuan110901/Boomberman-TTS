@@ -140,15 +140,18 @@ public class Bomb extends Entity {
 
             List<Entity> l = new ArrayList<Entity>();
             for (int k = 0; k < 4; k++) {
-                for (Entity e : BombermanGame.entities) {
-                    if ((e.getX() == x && e.getY() == y) || (e.getX() == x + getX[k] * Sprite.SCALED_SIZE && e.getY() == y + getY[k] * Sprite.SCALED_SIZE)) {
-                        l.add(e);
+                for (int i = 0; i < BombermanGame.n_flame; i++) {
+                    for (Entity e : BombermanGame.entities) {
+                        if ((e.getX() == x && e.getY() == y) || (e.getX() == x + (i+1) * getX[k] * Sprite.SCALED_SIZE && e.getY() == y + (i+1)*getY[k] * Sprite.SCALED_SIZE)) {
+                            l.add(e);
+                        }
                     }
                 }
             }
             for (Entity e : l) {
                 if (e instanceof Bomber) {
                     Bomber b = (Bomber) e;
+                    b.die();
                 }
                 if (e instanceof Balloom) {
                     Balloom b = (Balloom) e;

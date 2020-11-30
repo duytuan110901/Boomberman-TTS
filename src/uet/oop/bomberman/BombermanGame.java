@@ -42,8 +42,6 @@ public class BombermanGame extends Application {
     public static int n_flame = 1;
     public static int n_speed = 1;
 
-    public int BomberX = 1;
-    public int BomberY = 1;
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
@@ -72,69 +70,65 @@ public class BombermanGame extends Application {
             int y1 = bomberman.getY();
             switch (event.getCode()) {
                 case RIGHT:
-                    if(ObjectMap[BomberY][BomberX+1] instanceof Wall||ObjectMap[BomberY][BomberX+1] instanceof Brick) {
+                    if(ObjectMap[y][x+1] instanceof Wall||ObjectMap[y][x+1] instanceof Brick) {
                         bomberman.moveRight1();
-                    } else if (ObjectMap[BomberY][BomberX+1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[BomberY][BomberX+1]!=1) {
+                    } else if (ObjectMap[y][x+1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x+1]!=1) {
                         bomberman.moveRight();
-                        BomberX++;
                     }
-                    else if (ObjectMap[BomberY][BomberX+1] instanceof Item) {
-                        if (Item.explosed == true) {
+                    if (ObjectMap[y][x+1] instanceof Item) {
+                        if (((Item) ObjectMap[y][x+1]).explosed == true) {
                             bomberman.moveRight();
-                            Item it = (Item) ObjectMap[BomberY][BomberX+1];
+                            Item it = (Item) ObjectMap[y][x+1];
                             it.checkItem();
-                            Item.explosed = false;
+                            it.explosed = false;
                         } else {
                             bomberman.moveRight1();
                         }
                     }
                     break;
                 case LEFT:
-                    if(ObjectMap[BomberY][BomberX-1] instanceof Wall||ObjectMap[BomberY][BomberX-1] instanceof Brick) {
+                    if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick) {
                         bomberman.moveLeft1();
-                    } else if (ObjectMap[BomberY][BomberX-1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[BomberY][BomberX-1]!=1) {
+                    } else if (ObjectMap[y][x-1] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y][x-1]!=1) {
                         bomberman.moveLeft();
-                        BomberX--;
-                    } else if (ObjectMap[BomberY][BomberX-1] instanceof Item) {
-                        if (Item.explosed == true) {
+                    } else if (ObjectMap[y][x-1] instanceof Item) {
+                        if (((Item) ObjectMap[y][x-1]).explosed == true) {
                             bomberman.moveLeft();
-                            Item it = (Item) ObjectMap[BomberY][BomberX-1];
+                            Item it = (Item) ObjectMap[y][x-1];
                             it.checkItem();
-                            Item.explosed = false;
+                            it.explosed = false;
                         } else {
                             bomberman.moveLeft1();
                         }
                     }
                     break;
                 case UP:
-                    if(ObjectMap[BomberY-1][BomberX] instanceof Wall||ObjectMap[BomberY-1][BomberX] instanceof Brick) {
+                    if(ObjectMap[y-1][x] instanceof Wall||ObjectMap[y-1][x] instanceof Brick) {
                         bomberman.moveUp1();
-                    } else if (ObjectMap[BomberY-1][BomberX] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[BomberY-1][BomberX]!=1) {
+                    } else if (ObjectMap[y-1][x] instanceof Grass && x1 % 32 == 0 && y1 % 32 == 0 && BombMap[y-1][x]!=1) {
                         bomberman.moveUp();
-                        BomberY--;
-                    } else if (ObjectMap[BomberY-1][BomberX] instanceof Item) {
-                        if (Item.explosed == true) {
+                    } else if (ObjectMap[y-1][x] instanceof Item) {
+                        if (((Item) ObjectMap[y-1][x]).explosed == true) {
                             bomberman.moveUp();
-                            Item it = (Item) ObjectMap[BomberY-1][BomberX];
+                            Item it = (Item) ObjectMap[y-1][x];
                             it.checkItem();
-                            Item.explosed = false;
+                            it.explosed = false;
                         } else {
                             bomberman.moveUp1();
                         }
                     }
                     break;
                 case DOWN:
-                    if(ObjectMap[BomberY+1][BomberX] instanceof Wall || ObjectMap[BomberY+1][BomberX] instanceof Bomb) {
+                    if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb) {
                         bomberman.moveDown1();
-                    } else if ((ObjectMap[BomberY+1][BomberX] instanceof Grass) && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[BomberY+1][BomberX]!=1) {
+                    } else if ((ObjectMap[y+1][x] instanceof Grass) && y1 % 32 == 0&& x1 % 32 == 0 && BombMap[y+1][x]!=1) {
                         bomberman.moveDown();
-                        BomberY++;
-                    } else if (ObjectMap[BomberY+1][BomberX] instanceof Item) {
-                        if (Item.explosed == true) {
+                    } else if (ObjectMap[y+1][x] instanceof Item) {
+                        if (((Item) ObjectMap[y+1][x]).explosed == true) {
                             bomberman.moveDown();
-                            Item it = (Item) ObjectMap[BomberY+1][BomberX];
+                            Item it = (Item) ObjectMap[y+1][x];
                             it.checkItem();
-                            Item.explosed = false;
+                            it.explosed = false;
                         } else {
                             bomberman.moveDown1();
                         }
@@ -205,7 +199,7 @@ public class BombermanGame extends Application {
                             Flame down = new Flame(x, y + 1 + (n_flame - 1), null);
                             stillObjects.add(down);
                             down.down();
-                            testBrick( y + 1 + (n_flame - 1), x);
+                            testBrick(y + 1 + (n_flame - 1), x);
                         }
                     }
                     break;
