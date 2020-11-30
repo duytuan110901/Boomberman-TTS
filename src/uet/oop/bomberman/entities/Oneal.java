@@ -51,6 +51,7 @@ public class Oneal extends Entity {
         }
         if ((x - BomberX) * (x - BomberX) + (y - BomberY) * (y - BomberY) < 30000 && !kt) {
             kt = !kt;
+            v = 8;
         }
         if (kt) {
             Reset();
@@ -98,24 +99,33 @@ public class Oneal extends Entity {
         Timeline t = new Timeline();
         t.setCycleCount(Timeline.INDEFINITE);
 
-        if (v==4) {
-            t.getKeyFrames().add(new KeyFrame(
+        Timeline t1 = new Timeline();
+        Duration duration = Duration.millis(1400);
 
-                Duration.millis(v==4 ? 1500 : 750),
+        KeyFrame kf = new KeyFrame(duration, (ActionEvent event) -> {
+            this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
+            if (v==8) {
+                t1.play();
+                t.pause();
+            }
+        });
+        t.getKeyFrames().add(kf);
+
+        t.play();
+
+        t1.setCycleCount(Timeline.INDEFINITE);
+
+        t1.getKeyFrames().add(new KeyFrame(
+                Duration.millis(750),
                 (ActionEvent event) -> {
                     this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
-                }
-        )); }
-        else {
-            t.getKeyFrames().add(new KeyFrame(
-
-                    Duration.millis(750),
-                    (ActionEvent event) -> {
-                        this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
+                    if (v==4) {
+                        t.play();
+                        t1.pause();
                     }
-            ));
-        }
-        t.play();
+                }
+        ));
+
     }
 
     public void backtracking(int endX, int endY, int xx, int yy, int save_path) {
