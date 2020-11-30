@@ -293,6 +293,7 @@ public class Bomber extends Entity {
                 Duration.millis(400),
                 (ActionEvent event) -> {
                     img = Sprite.player_dead1.getFxImage();
+                    Sound.play("endgame3");
                 }
         ));
 

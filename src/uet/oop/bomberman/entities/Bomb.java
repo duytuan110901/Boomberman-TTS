@@ -105,6 +105,7 @@ public class Bomb extends Entity {
                 Duration.millis(3800),
                 (ActionEvent event) -> {
                     img = Sprite.bomb_exploded.getFxImage();
+                    Sound.play("BOM_11_M");
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
