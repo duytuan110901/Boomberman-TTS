@@ -143,59 +143,72 @@ public class BombermanGame extends Application {
                         testBrick(y, x);
                         BombMap[y][x] = 1;
                         int[] checkWall = {0, 0, 0, 0};
+                        boolean[] checkStop = {true, true, true, true};
                         for (int i = 0; i < n_flame - 1; i++) {
-                            if (checkWall[0] == 0 && !(ObjectMap[y][x-1-i] instanceof Wall)) {
+                            if (checkStop[0] && checkWall[0] == 0 && !(ObjectMap[y][x-1-i] instanceof Wall)) {
                                 Flame left = new Flame(x - 1 - i, y, null);
                                 stillObjects.add(left);
                                 left.statusHorizontal();
                                 testBrick(y, x - 1 - i);
+                                if (ObjectMap[y][x-1-i] instanceof Brick || ObjectMap[y][x-1-i] instanceof Item) {
+                                    checkStop[0] = false;
+                                }
                             } else {
                                 checkWall[0] = 1;
                             }
-                            if (checkWall[1] == 0 && !(ObjectMap[y][x+1+i] instanceof Wall)) {
+                            if (checkStop[1] && checkWall[1] == 0 && !(ObjectMap[y][x+1+i] instanceof Wall)) {
                                 Flame right = new Flame(x + 1 + i, y, null);
                                 stillObjects.add(right);
                                 right.statusHorizontal();
                                 testBrick(y, x + 1 + i);
+                                if (ObjectMap[y][x+1+i] instanceof Brick || ObjectMap[y][x+1+i] instanceof Item) {
+                                    checkStop[1] = false;
+                                }
                             } else {
                                 checkWall[1] = 1;
                             }
-                            if (checkWall[2] == 0 && !(ObjectMap[y-1-i][x] instanceof Wall)) {
+                            if (checkStop[2] && checkWall[2] == 0 && !(ObjectMap[y-1-i][x] instanceof Wall)) {
                                 Flame up = new Flame(x, y - 1 - i, null);
                                 stillObjects.add(up);
                                 up.statusVertical();
                                 testBrick(y - 1 - i, x);
+                                if (ObjectMap[y-1-i][x] instanceof Brick || ObjectMap[y-1-i][x] instanceof Item) {
+                                    checkStop[2] = false;
+                                }
                             } else {
                                 checkWall[2] = 1;
                             }
-                            if (checkWall[3] == 0 && !(ObjectMap[y+1+i][x] instanceof Wall)) {
+                            if (checkStop[3] && checkWall[3] == 0 && !(ObjectMap[y+1+i][x] instanceof Wall)) {
                                 Flame down = new Flame(x, y + 1 + i, null);
                                 stillObjects.add(down);
                                 down.statusVertical();
                                 testBrick(y + 1 + i, x);
+                                if (ObjectMap[y+1+i][x] instanceof Brick || ObjectMap[y+1+i][x] instanceof Item) {
+                                    checkStop[3] = false;
+                                }
                             } else {
                                 checkWall[3] = 1;
                             }
                         }
-                        if (checkWall[0] == 0 && !(ObjectMap[y][x - 1 - (n_flame - 1)] instanceof Wall)) {
+                        if (checkStop[0] && checkWall[0] == 0 && !(ObjectMap[y][x - 1 - (n_flame - 1)] instanceof Wall)) {
                             Flame left = new Flame(x - 1 - (n_flame - 1), y, null);
                             stillObjects.add(left);
                             left.left();
                             testBrick(y, x - 1 - (n_flame - 1));
                         }
-                        if (checkWall[1] == 0 && !(ObjectMap[y][x + 1 + (n_flame - 1)] instanceof Wall)) {
+                        if (checkStop[1] && checkWall[1] == 0 && !(ObjectMap[y][x + 1 + (n_flame - 1)] instanceof Wall)) {
                             Flame right = new Flame(x + 1 + (n_flame - 1), y, null);
                             stillObjects.add(right);
                             right.right();
                             testBrick(y, x + 1 + (n_flame - 1));
                         }
-                        if (checkWall[2] == 0 && !(ObjectMap[y - 1 - (n_flame - 1)][x] instanceof Wall)) {
+                        if (checkStop[2] && checkWall[2] == 0 && !(ObjectMap[y - 1 - (n_flame - 1)][x] instanceof Wall)) {
                             Flame up = new Flame(x, y - 1 - (n_flame - 1), null);
                             stillObjects.add(up);
                             up.up();
                             testBrick(y - 1 - (n_flame - 1), x);
                         }
-                        if (checkWall[3] == 0 && !(ObjectMap[y + 1 + (n_flame - 1)][x] instanceof Wall)) {
+                        if (checkStop[3] && checkWall[3] == 0 && !(ObjectMap[y + 1 + (n_flame - 1)][x] instanceof Wall)) {
                             Flame down = new Flame(x, y + 1 + (n_flame - 1), null);
                             stillObjects.add(down);
                             down.down();
