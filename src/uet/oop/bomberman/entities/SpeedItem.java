@@ -40,6 +40,7 @@ public class SpeedItem extends Item{
     public void checkItem() {
         if (this.x == x && this.y == y) {
             super.delete();
+            BombermanGame.bomberman.v = 50;
         }
     }
     @Override
