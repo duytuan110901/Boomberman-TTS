@@ -136,6 +136,7 @@ public class BombermanGame extends Application {
                     break;
                 case SPACE:
                     for (int j = 0; j < n_bomb; j++) {
+                        Sound.play("BOM_SET");
                         Bomb bomb = new Bomb(x, y, Sprite.bomb_2.getFxImage());
                         stillObjects.add(bomb);
                         bomb.TimeStart = System.currentTimeMillis();
@@ -246,6 +247,7 @@ public class BombermanGame extends Application {
                 o.runB();
             }
         }
+        Sound.play("soundtrack");
     }
 
     public void createMap() {

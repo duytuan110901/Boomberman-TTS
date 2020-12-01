@@ -62,6 +62,7 @@ public class Balloom extends Entity{
                 Duration.millis(300),
                 (ActionEvent event) -> {
                     img = Sprite.balloom_dead.getFxImage();
+                    Sound.play("AA126_11");
                 }
         ));
         t.getKeyFrames().add(new KeyFrame(
