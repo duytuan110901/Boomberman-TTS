@@ -143,7 +143,7 @@ public class Bomb extends Entity {
             for (int k = 0; k < 4; k++) {
                 for (int i = 0; i < BombermanGame.n_flame; i++) {
                     for (Entity e : BombermanGame.entities) {
-                        if ((e.getX() == x && e.getY() == y) || (e.getX() == x + (i+1) * getX[k] * Sprite.SCALED_SIZE && e.getY() == y + (i+1)*getY[k] * Sprite.SCALED_SIZE)) {
+                        if ((e.getX() == x && e.getY() == y) || ((e.getX() == x + (i+1) * getX[k] * Sprite.SCALED_SIZE && e.getY() == y + (i+1)*getY[k] * Sprite.SCALED_SIZE) && (BombermanGame.ObjectMap[y/32+getY[k]][x/32+getX[k]] instanceof Grass))) {
                             l.add(e);
                         }
                     }
