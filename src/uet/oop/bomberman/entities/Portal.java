@@ -5,10 +5,12 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Portal extends Entity {
-    public  static boolean explosed = false;
+    public boolean explosed = false;
+    public static boolean hasEnemy = true;
     public Portal (int x, int y, Image img) {
         super(x, y, img);
     }
@@ -21,17 +23,20 @@ public class Portal extends Entity {
             t.getKeyFrames().add(new KeyFrame(
                     Duration.millis(5000),
                     (ActionEvent event) -> {
-                        img = Sprite.portal.getFxImage();
+                            img = Sprite.portal.getFxImage();
+                            explosed = true;
                     }
             ));
             t.play();
         }
     }
 
-    public void checkItem() {
-        if (Balloom.n_Balloom == 0 && Oneal.n_oneal == 0) {
-            explosed = true;
+    public boolean checkItem() {
+        for (Entity e : BombermanGame.entities) {
+            if (e instanceof Balloom || e instanceof Oneal)
+                return true;
         }
+        return false;
     }
 
     public void endGame() { ;
@@ -49,6 +54,8 @@ public class Portal extends Entity {
 
     @Override
     public void update() {
-        checkItem();
+        if (!checkItem()) {
+            hasEnemy = false;
+        }
     }
 }

@@ -87,11 +87,10 @@ public class BombermanGame extends Application {
                     }
                     if (ObjectMap[y][x+1] instanceof Portal) {
                         Portal p = (Portal) ObjectMap[y][x+1];
-                        bomberman.moveRight1();
-                        if (Portal.explosed) {
+                        if (p.explosed && !Portal.hasEnemy) {
                             bomberman.moveRight();
                             p.endGame();
-                        }
+                        } else bomberman.moveRight1();
                     }
                     break;
                 case LEFT:
@@ -111,11 +110,10 @@ public class BombermanGame extends Application {
                     }
                     if (ObjectMap[y][x-1] instanceof Portal) {
                         Portal p = (Portal) ObjectMap[y][x-1];
-                        bomberman.moveLeft1();
-                        if (Portal.explosed) {
+                        if (p.explosed && !Portal.hasEnemy) {
                             bomberman.moveLeft();
                             p.endGame();
-                        }
+                        } else bomberman.moveLeft1();
                     }
                     break;
                 case UP:
@@ -135,11 +133,10 @@ public class BombermanGame extends Application {
                     }
                     if (ObjectMap[y-1][x] instanceof Portal) {
                         Portal p = (Portal) ObjectMap[y-1][x];
-                        bomberman.moveUp1();
-                        if (Portal.explosed) {
+                        if (p.explosed && !Portal.hasEnemy) {
                             bomberman.moveUp();
                             p.endGame();
-                        }
+                        } else bomberman.moveUp1();
                     }
                     break;
                 case DOWN:
@@ -159,11 +156,10 @@ public class BombermanGame extends Application {
                     }
                     if (ObjectMap[y+1][x] instanceof Portal) {
                         Portal p = (Portal) ObjectMap[y+1][x];
-                        bomberman.moveDown1();
-                        if (Portal.explosed) {
+                        if (p.explosed && !Portal.hasEnemy) {
                             bomberman.moveDown();
                             p.endGame();
-                        }
+                        } else bomberman.moveDown1();
                     }
                     break;
                 case SPACE:
