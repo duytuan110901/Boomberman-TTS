@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class Balloom extends Entity{
     private double v = 4;
+    public static int n_Balloom = 0;
 
     public int getX[] = {-1, 0, 1, 0, 0};
     public int getY[] = {0, -1, 0, 1, 0};
@@ -69,6 +70,7 @@ public class Balloom extends Entity{
                 Duration.millis(800),
                 (ActionEvent event) -> {
                     BombermanGame.entities.remove(this);
+
                 }
         ));
         t.play();
@@ -109,9 +111,8 @@ public class Balloom extends Entity{
         }
         for (Bomber e : l)  {
             if (checkColision(e)) {
-                e.die();
+
             }
         }
-
     }
 }

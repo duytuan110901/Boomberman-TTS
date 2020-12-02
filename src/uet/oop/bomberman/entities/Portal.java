@@ -7,12 +7,12 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Portal extends Item {
+public class Portal extends Entity {
+    public  static boolean explosed = false;
     public Portal (int x, int y, Image img) {
         super(x, y, img);
     }
 
-    @Override
     public void setImg() {
         if (explosed == false) {
             Timeline t = new Timeline();
@@ -22,20 +22,33 @@ public class Portal extends Item {
                     Duration.millis(5000),
                     (ActionEvent event) -> {
                         img = Sprite.portal.getFxImage();
-                        explosed = true;
                     }
             ));
             t.play();
         }
     }
 
-    @Override
     public void checkItem() {
+        if (Balloom.n_Balloom == 0 && Oneal.n_oneal == 0) {
+            explosed = true;
+        }
+    }
 
+    public void endGame() { ;
+        Timeline t = new Timeline();
+        t.setCycleCount(1);
+
+        t.getKeyFrames().add(new KeyFrame(
+                Duration.millis(230),
+                (ActionEvent event) -> {
+
+                }
+        ));
+        t.play();
     }
 
     @Override
     public void update() {
-
+        checkItem();
     }
 }

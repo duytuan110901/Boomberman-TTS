@@ -39,7 +39,7 @@ public class BombermanGame extends Application {
     public int[] getX = {-1, 0, 1, 0};
     public int[] getY = {0, -1, 0, 1};
     public static int n_bomb = 1;
-    public static int n_flame = 1;
+    public static int n_flame = 3;
     public static int n_speed = 1;
 
     public static void main(String[] args) {
@@ -85,6 +85,14 @@ public class BombermanGame extends Application {
                             bomberman.moveRight1();
                         }
                     }
+                    if (ObjectMap[y][x+1] instanceof Portal) {
+                        Portal p = (Portal) ObjectMap[y][x+1];
+                        bomberman.moveRight1();
+                        if (Portal.explosed) {
+                            bomberman.moveRight();
+                            p.endGame();
+                        }
+                    }
                     break;
                 case LEFT:
                     if(ObjectMap[y][x-1] instanceof Wall||ObjectMap[y][x-1] instanceof Brick||BombMap[y][x-1]==1) {
@@ -99,6 +107,14 @@ public class BombermanGame extends Application {
                             it.explosed = false;
                         } else {
                             bomberman.moveLeft1();
+                        }
+                    }
+                    if (ObjectMap[y][x-1] instanceof Portal) {
+                        Portal p = (Portal) ObjectMap[y][x-1];
+                        bomberman.moveLeft1();
+                        if (Portal.explosed) {
+                            bomberman.moveLeft();
+                            p.endGame();
                         }
                     }
                     break;
@@ -117,6 +133,14 @@ public class BombermanGame extends Application {
                             bomberman.moveUp1();
                         }
                     }
+                    if (ObjectMap[y-1][x] instanceof Portal) {
+                        Portal p = (Portal) ObjectMap[y-1][x];
+                        bomberman.moveUp1();
+                        if (Portal.explosed) {
+                            bomberman.moveUp();
+                            p.endGame();
+                        }
+                    }
                     break;
                 case DOWN:
                     if(ObjectMap[y+1][x] instanceof Wall || ObjectMap[y+1][x] instanceof Bomb || BombMap[y+1][x]==1) {
@@ -131,6 +155,14 @@ public class BombermanGame extends Application {
                             it.explosed = false;
                         } else {
                             bomberman.moveDown1();
+                        }
+                    }
+                    if (ObjectMap[y+1][x] instanceof Portal) {
+                        Portal p = (Portal) ObjectMap[y+1][x];
+                        bomberman.moveDown1();
+                        if (Portal.explosed) {
+                            bomberman.moveDown();
+                            p.endGame();
                         }
                     }
                     break;
@@ -233,6 +265,8 @@ public class BombermanGame extends Application {
         timer.start();
 
         createMap();
+        System.out.println(Balloom.n_Balloom);
+        System.out.println(Oneal.n_oneal);
 
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
@@ -272,6 +306,7 @@ public class BombermanGame extends Application {
                     } else if (x == '1') {
                         en = new Balloom(i, j, Sprite.balloom_right1.getFxImage());
                         object = new Grass(i, j, Sprite.grass.getFxImage());
+                        Balloom.n_Balloom++;
                     } else if ( x == 'b') {
                         object = new BombItem(i, j, Sprite.brick.getFxImage());
                     } else if ( x == 's') {
@@ -281,6 +316,7 @@ public class BombermanGame extends Application {
                     } else if (x == '2') {
                         en = new Oneal(i, j, Sprite.oneal_right1.getFxImage());
                         object = new Grass(i, j, Sprite.grass.getFxImage());
+                        Oneal.n_oneal++;
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
@@ -315,6 +351,9 @@ public class BombermanGame extends Application {
             Item it = (Item) ObjectMap[y][x];
             it.setImg();
             Item.TimerStart = System.currentTimeMillis();
+        } else if (ObjectMap[y][x] instanceof  Portal) {
+            Portal p = (Portal) ObjectMap[y][x];
+            p.setImg();
         }
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Oneal extends Entity {
+    public static int n_oneal = 0;
     private int getX[] = {-1, 0, 1, 0};
     private int getY[] = {0, 1, 0, -1};
     private List<Integer>save_choose = new ArrayList<Integer>();
@@ -209,7 +210,7 @@ public class Oneal extends Entity {
         }
         for (Bomber e : l)  {
             if (checkColision(e)) {
-                e.die();
+
             }
         }
     }
