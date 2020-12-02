@@ -104,7 +104,8 @@ public class Oneal extends Entity {
         Duration duration = Duration.millis(1400);
 
         KeyFrame kf = new KeyFrame(duration, (ActionEvent event) -> {
-            this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
+            if (BombermanGame.bomberman != null)
+                this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
             if (v==8) {
                 t1.play();
                 t.pause();
@@ -119,7 +120,8 @@ public class Oneal extends Entity {
         t1.getKeyFrames().add(new KeyFrame(
                 Duration.millis(750),
                 (ActionEvent event) -> {
-                    this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
+                    if (BombermanGame.bomberman != null)
+                        this.run(BombermanGame.bomberman.getX(), BombermanGame.bomberman.getY());
                     if (v==4) {
                         t.play();
                         t1.pause();

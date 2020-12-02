@@ -37,7 +37,6 @@ public class FlameItem extends Item {
             t.getKeyFrames().add(new KeyFrame(
                     Duration.millis(35000),
                     (ActionEvent event) -> {
-                        super.delete();
                     }
             ));
             t.play();

@@ -29,7 +29,6 @@ public class SpeedItem extends Item{
             t.getKeyFrames().add(new KeyFrame(
                     Duration.millis(35000),
                     (ActionEvent event) -> {
-                        super.delete();
                     }
             ));
             t.play();
@@ -38,7 +37,7 @@ public class SpeedItem extends Item{
 
     @Override
     public void checkItem() {
-        if (this.x == x && this.y == y) {
+        if (explosed) {
             super.delete();
             BombermanGame.bomberman.v = 50;
         }

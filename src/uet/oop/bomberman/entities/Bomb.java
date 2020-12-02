@@ -137,7 +137,7 @@ public class Bomb extends Entity {
     }
 
     public void checkEntities() {
-        if (System.currentTimeMillis() - TimeStart > 3800) {
+        if (System.currentTimeMillis() - TimeStart > 3800 && BombermanGame.bomberman!=null) {
 
             List<Entity> l = new ArrayList<Entity>();
             for (int k = 0; k < 4; k++) {
@@ -153,6 +153,7 @@ public class Bomb extends Entity {
                 if (e instanceof Bomber) {
                     Bomber b = (Bomber) e;
                     b.die();
+                    BombermanGame.bomberman = null;
                 }
                 if (e instanceof Balloom) {
                     Balloom b = (Balloom) e;
