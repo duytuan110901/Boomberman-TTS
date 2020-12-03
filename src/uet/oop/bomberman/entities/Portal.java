@@ -9,7 +9,7 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Portal extends Entity {
-    public boolean explosed = false;
+    public static boolean explosed = false;
     public static boolean hasEnemy = true;
     public Portal (int x, int y, Image img) {
         super(x, y, img);

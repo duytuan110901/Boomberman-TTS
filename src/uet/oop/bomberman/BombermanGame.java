@@ -50,6 +50,7 @@ public class BombermanGame extends Application {
     public static int n_flame = 3;
     public static int n_speed = 1;
     public Clip clip;
+    public int n_level = 1;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -74,6 +75,8 @@ public class BombermanGame extends Application {
         Scene scene1 = new Scene(borderPane, Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         stage.setScene(scene1);
         stage.show();
+        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
+        gc = canvas.getGraphicsContext2D();
 
         // Tao Canvas
         button.setOnAction(event1 -> {
@@ -92,8 +95,6 @@ public class BombermanGame extends Application {
             n_speed = 1;
             finish = false;
             clip = null;
-            canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
-            gc = canvas.getGraphicsContext2D();
 
             // Tao root container
             Group root = new Group();
@@ -106,7 +107,7 @@ public class BombermanGame extends Application {
             stage.setScene(scene);
             stage.show();
 
-            createMap();
+            createMap(n_level);
             bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
             entities.add(bomberman);
 
@@ -140,7 +141,13 @@ public class BombermanGame extends Application {
                                 finish = true;
                                 label.setText("You win!");
                                 Sound.stop("CRYST_UP");
-                                button.setText("Next");
+                                if (n_level < 2) {
+                                    n_level++;
+                                    button.setText("Next Level");
+                                }  else {
+                                    label.setText("END GAME");
+                                    n_level=1;
+                                }
                             } else bomberman.moveRight1();
                         }
                         break;
@@ -167,7 +174,13 @@ public class BombermanGame extends Application {
                                 finish = true;
                                 label.setText("You win!");
                                 Sound.stop("CRYST_UP");
-                                button.setText("Next");
+                                if (n_level < 2) {
+                                    n_level++;
+                                    button.setText("Next Level");
+                                }  else {
+                                    label.setText("END GAME");
+                                    n_level=1;
+                                }
                             } else bomberman.moveLeft1();
                         }
                         break;
@@ -194,7 +207,13 @@ public class BombermanGame extends Application {
                                 finish = true;
                                 label.setText("You win!");
                                 Sound.stop("CRYST_UP");
-                                button.setText("Next");
+                                if (n_level < 2) {
+                                    n_level++;
+                                    button.setText("Next Level");
+                                }  else {
+                                    label.setText("END GAME");
+                                    n_level=1;
+                                }
                             } else bomberman.moveUp1();
                         }
                         break;
@@ -219,7 +238,13 @@ public class BombermanGame extends Application {
                                 p.endGame();
                                 label.setText("You win!");
                                 Sound.stop("CRYST_UP");
-                                button.setText("Next");
+                                if (n_level < 2) {
+                                    n_level++;
+                                    button.setText("Next Level");
+                                }  else {
+                                    label.setText("END GAME");
+                                    n_level=1;
+                                }
                                 finish = true;
                             } else bomberman.moveDown1();
                         }
@@ -241,7 +266,7 @@ public class BombermanGame extends Application {
                                     stillObjects.add(left);
                                     left.statusHorizontal();
                                     testBrick(y, x - 1 - i);
-                                    if (ObjectMap[y][x-1-i] instanceof Brick || ObjectMap[y][x-1-i] instanceof Item) {
+                                    if (ObjectMap[y][x-1-i] instanceof Brick || ObjectMap[y][x-1-i] instanceof Item || ObjectMap[y][x-1-i] instanceof Portal || Portal.explosed != true) {
                                         checkStop[0] = false;
                                     }
                                 } else {
@@ -252,7 +277,7 @@ public class BombermanGame extends Application {
                                     stillObjects.add(right);
                                     right.statusHorizontal();
                                     testBrick(y, x + 1 + i);
-                                    if (ObjectMap[y][x+1+i] instanceof Brick || ObjectMap[y][x+1+i] instanceof Item) {
+                                    if (ObjectMap[y][x+1+i] instanceof Brick || ObjectMap[y][x+1+i] instanceof Item || ObjectMap[y][x+1+i] instanceof Portal) {
                                         checkStop[1] = false;
                                     }
                                 } else {
@@ -263,7 +288,7 @@ public class BombermanGame extends Application {
                                     stillObjects.add(up);
                                     up.statusVertical();
                                     testBrick(y - 1 - i, x);
-                                    if (ObjectMap[y-1-i][x] instanceof Brick || ObjectMap[y-1-i][x] instanceof Item) {
+                                    if (ObjectMap[y-1-i][x] instanceof Brick || ObjectMap[y-1-i][x] instanceof Item || ObjectMap[y-1-i][x] instanceof Portal) {
                                         checkStop[2] = false;
                                     }
                                 } else {
@@ -274,7 +299,7 @@ public class BombermanGame extends Application {
                                     stillObjects.add(down);
                                     down.statusVertical();
                                     testBrick(y + 1 + i, x);
-                                    if (ObjectMap[y+1+i][x] instanceof Brick || ObjectMap[y+1+i][x] instanceof Item) {
+                                    if (ObjectMap[y+1+i][x] instanceof Brick || ObjectMap[y+1+i][x] instanceof Item || ObjectMap[y+1+i][x] instanceof Portal) {
                                         checkStop[3] = false;
                                     }
                                 } else {
@@ -347,8 +372,8 @@ public class BombermanGame extends Application {
 
     }
 
-    public void createMap() {
-        File file = new File("target\\classes\\levels\\Level1.txt");
+    public void createMap(int n_level) {
+        File file = new File("target\\classes\\levels\\Level"+ n_level + ".txt");
         try {
             boolean kt = true;
             Scanner reader = new Scanner(file);
