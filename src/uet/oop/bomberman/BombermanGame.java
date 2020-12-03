@@ -142,7 +142,7 @@ public class BombermanGame extends Application {
                                 p.endGame();
                                 finish = true;
                                 label.setText("You win!");
-                                Sound.stop("CRYST_UP");
+                                Sound.play("CRYST_UP");
                                 if (n_level < 2) {
                                     n_level++;
                                     button.setText("Next Level");
@@ -175,7 +175,7 @@ public class BombermanGame extends Application {
                                 p.endGame();
                                 finish = true;
                                 label.setText("You win!");
-                                Sound.stop("CRYST_UP");
+                                Sound.play("CRYST_UP");
                                 if (n_level < 2) {
                                     n_level++;
                                     button.setText("Next Level");
@@ -208,7 +208,7 @@ public class BombermanGame extends Application {
                                 p.endGame();
                                 finish = true;
                                 label.setText("You win!");
-                                Sound.stop("CRYST_UP");
+                                Sound.play("CRYST_UP");
                                 if (n_level < 2) {
                                     n_level++;
                                     button.setText("Next Level");
@@ -239,7 +239,7 @@ public class BombermanGame extends Application {
                                 bomberman.moveDown();
                                 p.endGame();
                                 label.setText("You win!");
-                                Sound.stop("CRYST_UP");
+                                Sound.play("CRYST_UP");
                                 if (n_level < 2) {
                                     n_level++;
                                     button.setText("Next Level");

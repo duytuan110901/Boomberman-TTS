@@ -62,7 +62,7 @@ public class Doll extends Entity {
         t.getKeyFrames().add(new KeyFrame(
                 Duration.millis(300),
                 (ActionEvent event) -> {
-                    img = Sprite.balloom_dead.getFxImage();
+                    img = Sprite.doll_dead.getFxImage();
                     Sound.play("AA126_11");
                 }
         ));
