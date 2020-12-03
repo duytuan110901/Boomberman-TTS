@@ -33,7 +33,7 @@ public class Portal extends Entity {
 
     public boolean checkItem() {
         for (Entity e : BombermanGame.entities) {
-            if (e instanceof Balloom || e instanceof Oneal)
+            if (e instanceof Balloom || e instanceof Oneal || e instanceof Doll || e instanceof Kondoria)
                 return true;
         }
         return false;

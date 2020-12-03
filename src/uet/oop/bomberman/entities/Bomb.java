@@ -166,6 +166,11 @@ public class Bomb extends Entity {
                 if (e instanceof Doll) {
                     Doll d = (Doll) e;
                     d.die();
+
+                }
+                if (e instanceof Kondoria) {
+                    Kondoria k = (Kondoria) e;
+                    k.die();
                 }
             }
         }

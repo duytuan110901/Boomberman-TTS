@@ -268,7 +268,7 @@ public class BombermanGame extends Application {
                                     stillObjects.add(left);
                                     left.statusHorizontal();
                                     testBrick(y, x - 1 - i);
-                                    if (ObjectMap[y][x-1-i] instanceof Brick || ObjectMap[y][x-1-i] instanceof Item || ObjectMap[y][x-1-i] instanceof Portal || Portal.explosed != true) {
+                                    if (ObjectMap[y][x-1-i] instanceof Brick || ObjectMap[y][x-1-i] instanceof Item || ObjectMap[y][x-1-i] instanceof Portal) {
                                         checkStop[0] = false;
                                     }
                                 } else {
@@ -372,6 +372,10 @@ public class BombermanGame extends Application {
                     Doll d = (Doll) e;
                     d.runB();
                 }
+                if (e instanceof Kondoria) {
+                    Kondoria k = (Kondoria) e;
+                    k.runB();
+                }
             }
             play("soundtrack");
         });
@@ -391,11 +395,13 @@ public class BombermanGame extends Application {
                     mapMatrix[j][i] = x;
                     Entity object;
                     Entity en = null;
+                    Entity e = null;
                     if (x == '#') {
                         object = new Wall(i, j, Sprite.wall.getFxImage());
                     } else if (x == '*') {
                         object = new Brick(i, j, Sprite.brick.getFxImage());
                     } else if (x == 'x') {
+                        e = new Grass(i, j, Sprite.grass.getFxImage());
                         object = new Portal(i, j, Sprite.brick.getFxImage());
                     } else if (x == '1') {
                         en = new Balloom(i, j, Sprite.balloom_right1.getFxImage());
@@ -415,9 +421,16 @@ public class BombermanGame extends Application {
                         en = new Doll(i, j, Sprite.doll_left2.getFxImage());
                         object = new Grass(i,j, Sprite.grass.getFxImage());
                         Doll.n_doll++;
+                    } else if (x == '4') {
+                        en = new Kondoria(i, j, Sprite.kondoria_right1.getFxImage());
+                        object = new Grass(i, j, Sprite.grass.getFxImage());
+
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
+                    }
+                    if (e!=null) {
+                        stillObjects.add(e);
                     }
                     ObjectMap[j][i] = object;
                     stillObjects.add(object);
