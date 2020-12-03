@@ -10,6 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
@@ -55,10 +57,15 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        javafx.scene.control.Label label = new javafx.scene.control.Label("                                                                                                                                          Bomberman");
+        javafx.scene.control.Label label = new javafx.scene.control.Label("Bomberman");
         label.setPrefSize(600, 200);
+        label.setFont(new Font(34));
+        label.setTextFill(Color.web("#0076a3"));
+        label.setTranslateX(400);
+        label.setTranslateY(50);
         javafx.scene.control.Button button = new Button("Start");
         button.setPrefSize(200, 100);
+        button.setFont(new Font(34));
 
         stage.setTitle("Bomberman");
         BorderPane borderPane = new BorderPane();
