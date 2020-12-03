@@ -103,15 +103,18 @@ public class Balloom extends Entity{
     }
     @Override
     public void update() {
-        List<Bomber> l = new ArrayList<Bomber>();
-        for (Entity e : BombermanGame.entities) {
-            if (e instanceof Bomber) {
-                l.add((Bomber) e);
+        if (BombermanGame.bomberman != null) {
+            List<Bomber> l = new ArrayList<Bomber>();
+            for (Entity e : BombermanGame.entities) {
+                if (e instanceof Bomber) {
+                    l.add((Bomber) e);
+                }
             }
-        }
-        for (Bomber e : l)  {
-            if (checkColision(e)) {
-                e.die();
+            for (Bomber e : l) {
+                if (checkColision(e)) {
+                    e.die();
+                    BombermanGame.bomberman = null;
+                }
             }
         }
     }
