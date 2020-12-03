@@ -89,6 +89,8 @@ public class BombermanGame extends Application {
 
                 }
             }
+            Portal.explosed = false;
+            Portal.hasEnemy = true;
             bomberman = null;
             n_bomb = 1;
             n_flame = 1;
@@ -145,7 +147,7 @@ public class BombermanGame extends Application {
                                     n_level++;
                                     button.setText("Next Level");
                                 }  else {
-                                    label.setText("END GAME");
+                                    button.setText("END GAME");
                                     n_level=1;
                                 }
                             } else bomberman.moveRight1();
@@ -178,7 +180,7 @@ public class BombermanGame extends Application {
                                     n_level++;
                                     button.setText("Next Level");
                                 }  else {
-                                    label.setText("END GAME");
+                                    button.setText("END GAME");
                                     n_level=1;
                                 }
                             } else bomberman.moveLeft1();
@@ -211,7 +213,7 @@ public class BombermanGame extends Application {
                                     n_level++;
                                     button.setText("Next Level");
                                 }  else {
-                                    label.setText("END GAME");
+                                    button.setText("END GAME");
                                     n_level=1;
                                 }
                             } else bomberman.moveUp1();
@@ -242,7 +244,7 @@ public class BombermanGame extends Application {
                                     n_level++;
                                     button.setText("Next Level");
                                 }  else {
-                                    label.setText("END GAME");
+                                    button.setText("END GAME");
                                     n_level=1;
                                 }
                                 finish = true;
@@ -366,6 +368,10 @@ public class BombermanGame extends Application {
                     Oneal o = (Oneal) e;
                     o.runB();
                 }
+                if (e instanceof Doll) {
+                    Doll d = (Doll) e;
+                    d.runB();
+                }
             }
             play("soundtrack");
         });
@@ -405,6 +411,10 @@ public class BombermanGame extends Application {
                         en = new Oneal(i, j, Sprite.oneal_right1.getFxImage());
                         object = new Grass(i, j, Sprite.grass.getFxImage());
                         Oneal.n_oneal++;
+                    } else if (x == '3') {
+                        en = new Doll(i, j, Sprite.doll_left2.getFxImage());
+                        object = new Grass(i,j, Sprite.grass.getFxImage());
+                        Doll.n_doll++;
                     }
                     else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
