@@ -130,6 +130,10 @@ public class BombermanGame extends Application {
                             if (p.explosed && !Portal.hasEnemy) {
                                 bomberman.moveRight();
                                 p.endGame();
+                                finish = true;
+                                label.setText("You win!");
+                                Sound.stop("CRYST_UP");
+                                button.setText("Next");
                             } else bomberman.moveRight1();
                         }
                         break;
@@ -153,6 +157,10 @@ public class BombermanGame extends Application {
                             if (p.explosed && !Portal.hasEnemy) {
                                 bomberman.moveLeft();
                                 p.endGame();
+                                finish = true;
+                                label.setText("You win!");
+                                Sound.stop("CRYST_UP");
+                                button.setText("Next");
                             } else bomberman.moveLeft1();
                         }
                         break;
@@ -176,6 +184,10 @@ public class BombermanGame extends Application {
                             if (p.explosed && !Portal.hasEnemy) {
                                 bomberman.moveUp();
                                 p.endGame();
+                                finish = true;
+                                label.setText("You win!");
+                                Sound.stop("CRYST_UP");
+                                button.setText("Next");
                             } else bomberman.moveUp1();
                         }
                         break;
@@ -198,6 +210,10 @@ public class BombermanGame extends Application {
                             if (p.explosed && !Portal.hasEnemy) {
                                 bomberman.moveDown();
                                 p.endGame();
+                                label.setText("You win!");
+                                Sound.stop("CRYST_UP");
+                                button.setText("Next");
+                                finish = true;
                             } else bomberman.moveDown1();
                         }
                         break;
@@ -295,6 +311,10 @@ public class BombermanGame extends Application {
                 public void handle(long l) {
                     render();
                     update();
+                    if (BombermanGame.bomberman == null) {
+                        label.setText("You lose!");
+                        button.setText("Retry");
+                    }
                     if (finish) {
                         clip.stop();
                         stage.setScene(scene1);
