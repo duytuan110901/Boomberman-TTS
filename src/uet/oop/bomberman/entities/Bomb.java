@@ -163,6 +163,10 @@ public class Bomb extends Entity {
                     Oneal o = (Oneal) e;
                     o.die();
                 }
+                if (e instanceof Doll) {
+                    Doll d = (Doll) e;
+                    d.die();
+                }
             }
         }
     }
